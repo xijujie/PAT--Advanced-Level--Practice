@@ -18,5 +18,6 @@ int main() {
 		if (a[s[i]] == 0) cout << s[i];
 		a[s[i]] = 1;
 	}
+	return 0;
 
 }
