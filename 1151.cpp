@@ -7,42 +7,31 @@ const int maxn = 10000;
 int in[maxn], pre[maxn];
 struct node {
 	int k;
-	node *l, *r, *father;
+	node *father;
 };
 map<int, node*> mp;
-map<int, int> pos, father;
-void creat(int inl, int inr, int pl, int pr, node *&root) {
+map<int, int> pos;
+void creat(int inl, int inr, int pl, int pr, node *father) {
 	if (inl > inr) return;
-	root = new node;
+	node *root = new node;
 	root->k = pre[pl];
-	root->l = root->r = root->father = nullptr;
+	root->father = father;
 	mp[root->k] = root;
 	int inpos = pos[pre[pl]];
-	creat(inl, inpos - 1, pl + 1, pl + inpos - inl, root->l);
-	creat(inpos + 1, inr, pl + inpos - inl + 1, pr, root->r);
-}
-void dfs(node *root) {
-	if (root->l) {
-		root->l->father = root;
-		dfs(root->l);
-	}
-	if (root->r) {
-		root->r->father = root;
-		dfs(root->r);
-	}
+	creat(inl, inpos - 1, pl + 1, pl + inpos - inl, root);
+	creat(inpos + 1, inr, pl + inpos - inl + 1, pr, root);
 }
 int main() {
 	//freopen("in.txt","r",stdin);
-	int n, m, u, v;
+	int n, m, u, v, root;
 	scanf("%d%d", &m, &n);
 	for (int i = 0; i < n; ++i) {
 		scanf("%d", &in[i]);
 		pos[in[i]] = i;
 	}
 	for (int i = 0; i < n; ++i) scanf("%d", &pre[i]);
-	node *root = nullptr;
-	creat(0, n - 1, 0, n - 1, root);
-	dfs(root);
+	creat(0, n - 1, 0, n - 1, nullptr);
+	root = pre[0];
 	for (int k = 0; k < m; ++k) {
 		scanf("%d%d", &u, &v);
 		auto f1 = mp.find(u), f2 = mp.find(v);
@@ -52,16 +41,16 @@ int main() {
 		else {
 			vector<int> v1, v2;
 			node *p = f1->second, *q = f2->second;
-			while (p != root) {
+			while (p->k != root) {
 				v1.push_back(p->k);
 				p = p->father;
 			}
-			v1.push_back(root->k);
-			while (q != root) {
+			v1.push_back(root);
+			while (q->k != root) {
 				v2.push_back(q->k);
 				q = q->father;
 			}
-			v2.push_back(root->k);
+			v2.push_back(root);
 			int i = v1.size() - 1, j = v2.size() - 1;
 			for (; i >= 0 && j >= 0 && v1[i] == v2[j]; --i, --j);
 			if (v1[i + 1] == u) printf("%d is an ancestor of %d.\n", u, v);
