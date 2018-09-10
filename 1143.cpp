@@ -1,3 +1,4 @@
+//9ms
 #include <iostream> 
 #include <algorithm>
 #include <unordered_set>
@@ -21,7 +22,7 @@ int main() {
 		else {
 			for (int i = 0; i < n; ++i) {
 				k = pre[i];
-				if ((u <= k & v >= k) || (u >= k & v <= k)) { //共同最低祖先
+				if ((u <= k && v >= k) || (u >= k && v <= k)) { 
 					if (u == k) printf("%d is an ancestor of %d.\n", u, v);
 					else if(v == k) printf("%d is an ancestor of %d.\n", v, u);
 					else printf("LCA of %d and %d is %d.\n", u, v, k);
@@ -33,6 +34,8 @@ int main() {
 	return 0;
 }
 
+
+//48ms
 //#include <iostream> 
 //#include <algorithm>
 //#include <unordered_set>

@@ -1,3 +1,4 @@
+//114ms
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -61,7 +62,54 @@ int main() {
 	return 0;
 }
 
-//不建树
+
+//310ms
+//#include <iostream>
+//#include <algorithm>
+//#include <vector>
+//#include <map>
+//using namespace std;
+//const int maxn = 10000;
+//int in[maxn], pre[maxn];
+//struct node {
+//	int k;
+//	node *l, *r;
+//	node(int _k) :k(_k), l(nullptr), r(nullptr){}
+//};
+//map<int, int> pos;
+//int main() {
+//	//freopen("in.txt","r",stdin);
+//	int n, m, u, v;
+//	scanf("%d%d", &m, &n);
+//	for (int i = 0; i < n; ++i) {
+//		scanf("%d", &in[i]);
+//		pos[in[i]] = i;
+//	}
+//	for (int i = 0; i < n; ++i) scanf("%d", &pre[i]);
+//	for (int k = 0; k < m; ++k) {
+//		scanf("%d%d", &u, &v);
+//		auto f1 = pos.find(u), f2 = pos.find(v);
+//		if (f1 == pos.end() && f2 == pos.end()) printf("ERROR: %d and %d are not found.\n", u, v);
+//		else if (f1 == pos.end()) printf("ERROR: %d is not found.\n", u);
+//		else if (f2 == pos.end()) printf("ERROR: %d is not found.\n", v);
+//		else {
+//			int pu = f1->second, pv = f2->second, pk;
+//			for (int i = 0; i < n; ++i) {
+//				pk = pos[pre[i]];
+//				if ((pu <= pk && pv >= pk) || (pu >= pk && pv <= pk)) { 
+//					if (pu == pk) printf("%d is an ancestor of %d.\n", u, v);
+//					else if (pv == pk) printf("%d is an ancestor of %d.\n", v, u);
+//					else printf("LCA of %d and %d is %d.\n", u, v, pre[i]);
+//					break;
+//				}
+//			}
+//		}	
+//	}
+//	return 0;
+//}
+
+
+//550ms
 //#include <iostream>
 //#include <algorithm>
 //#include <vector>
@@ -85,7 +133,7 @@ int main() {
 //	scanf("%d%d", &m, &n);
 //	for (int i = 0; i < n; ++i) { 
 //		scanf("%d", &in[i]); 
-//		pos[in[i]] = i;  //每个key值在中序序列中的位置
+//		pos[in[i]] = i;  
 //	}
 //	for (int i = 0; i < n; ++i) scanf("%d", &pre[i]);
 //	for (int i = 0; i < m; ++i) {
@@ -97,3 +145,4 @@ int main() {
 //	}
 //	return 0;
 //}
+
